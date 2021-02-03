@@ -17,7 +17,8 @@ app.use(body_parser.json());
 app.use("/public", express.static(__dirname + '/public'));
 app.use('/api/*',(req, res, next)=>{
     freeAuthToken = [
-        '/api/login'
+        '/api/login',
+        '/api/registration'
         ] 
        let available  =  freeAuthToken.includes(req.baseUrl)     
        if(available){
@@ -32,7 +33,7 @@ app.use('/api/',api);
 
 global.__basedir = __dirname;
 
-mongoose.connect('mongodb://localhost:27017/realestate', {useUnifiedTopology: true,useNewUrlParser: true,useFindAndModify:false});
+mongoose.connect('mongodb+srv://admin:admin123@cluster0.bhyfc.mongodb.net/<dbname>?retryWrites=true&w=majority', {useUnifiedTopology: true,useNewUrlParser: true,useFindAndModify:false});
 db = mongoose.connection;
 db.on('error',console.error.bind(console,'connection failed'));
 db.once('open', function () {
