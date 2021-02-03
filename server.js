@@ -2,14 +2,17 @@ const express = require("express");
 const body_parser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const PORT = 3000;
 const app = express();
 const api = require('./routes/api');
 const jwtTokenVerify = require('./lib/utility');
 const path = require('path');
+const dotenv = require('dotenv');
 
+dotenv.config({path:'config.env'})
+
+PORT = process.env.PORT || 8080
 app.use(cors());
-console.log(__dirname);
+
 app.use(body_parser.json());
 app.use("/public", express.static(__dirname + '/public'));
 app.use('/api/*',(req, res, next)=>{
